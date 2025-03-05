@@ -5,17 +5,12 @@ workflows:
     max_build_duration: 120
     environment:
       flutter: stable
-      java: 11  # Pastikan menggunakan JDK 11 agar kompatibel dengan Gradle 7.5.1
+      java: 11
     scripts:
       - name: Check Java Version
         script: |
           echo "JAVA_HOME: $JAVA_HOME"
           java -version
-
-      - name: Set JAVA_HOME (JDK 11)
-        script: |
-          export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-          echo "Using JAVA_HOME: $JAVA_HOME"
 
       - name: Debug Build Path
         script: |
@@ -23,12 +18,29 @@ workflows:
           ls -la
           cd flutter_AppCoffe
           echo "Inside flutter_AppCoffe:"
-          ls -la  # Mengecek apakah pubspec.yaml ada
+          ls -la  # Cek apakah pubspec.yaml ada
 
       - name: Run Flutter Doctor
         script: |
           cd flutter_AppCoffe
           flutter doctor -v
+
+      - name: Debug Android Folder
+        script: |
+          cd flutter_AppCoffe
+          echo "Checking android directory..."
+          ls -la android/
+
+      - name: Generate Gradle Wrapper (Jika Perlu)
+        script: |
+          cd flutter_AppCoffe/android
+          flutter pub get
+          flutter build apk --config-only
+
+      - name: Fix Gradle Permissions
+        script: |
+          cd flutter_AppCoffe/android
+          chmod +x gradlew
 
       - name: Clean Build
         script: |
