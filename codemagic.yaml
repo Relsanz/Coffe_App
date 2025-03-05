@@ -5,7 +5,7 @@ workflows:
     max_build_duration: 120
     environment:
       flutter: stable
-      java: 11  # Pastikan menggunakan JDK 11 agar kompatibel dengan Gradle 7.5.1
+      java: 11  # Gunakan JDK 11 agar kompatibel dengan Gradle 7.5.1
     scripts:
       - name: Check Java Version
         script: |
@@ -20,7 +20,7 @@ workflows:
       - name: Debug Build Path
         script: |
           echo "Current directory: $(pwd)"
-          ls -la  # Melihat struktur direktori
+          ls -la  # Menampilkan isi folder untuk memastikan pubspec.yaml ada
 
       - name: Run Flutter Doctor
         script: |
@@ -29,6 +29,7 @@ workflows:
       - name: Clean Build
         script: |
           cd $CM_BUILD_DIR
+          ls -la  # Cek apakah pubspec.yaml ada di root
           flutter clean
 
       - name: Get Flutter Dependencies
