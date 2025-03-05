@@ -1,12 +1,13 @@
 buildscript {
+    ext.kotlin_version = '1.8.10' // Ganti dengan versi Kotlin terbaru jika perlu
     repositories {
         google()
         mavenCentral()
     }
-
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
-        classpath 'com.google.gms:google-services:4.3.10' // Jika pakai Firebase
+        classpath "com.android.tools.build:gradle:7.3.0" // Sesuaikan dengan versi terbaru jika perlu
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.15' // Jika menggunakan Firebase
     }
 }
 
@@ -15,8 +16,4 @@ allprojects {
         google()
         mavenCentral()
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
