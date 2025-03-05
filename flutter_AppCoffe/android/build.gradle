@@ -6,6 +6,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'com.google.gms:google-services:4.3.10' // Jika pakai Firebase
     }
 }
 
@@ -13,17 +14,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://storage.googleapis.com/download.flutter.io' }
     }
-}
-
-
-rootProject.buildDir = '../build'
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(':app')
 }
 
 task clean(type: Delete) {
