@@ -12,9 +12,11 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        maven { url 'https://storage.googleapis.com/download.flutter.io' }
     }
 }
+
 
 rootProject.buildDir = '../build'
 subprojects {
