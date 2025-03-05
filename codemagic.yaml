@@ -1,12 +1,26 @@
 workflows:
-  android-build:
-    name: Build Android APK
-    instance_type: linux
-    max_build_duration: 60
+  flutter_build:
+    name: Flutter Build
+    instance_type: mac_mini_m1
+    max_build_duration: 120
     environment:
       flutter: stable
     scripts:
-      - flutter pub get
-      - flutter build apk --release
+      - name: Check Java Version
+        script: |
+          echo "JAVA_HOME: $JAVA_HOME"
+          java -version
+      - name: Clean Build
+        script: |
+          cd $CM_BUILD_DIR/flutter_AppCoffe
+          flutter clean
+      - name: Get Flutter Dependencies
+        script: |
+          cd $CM_BUILD_DIR/flutter_AppCoffe
+          flutter pub get
+      - name: Build APK
+        script: |
+          cd $CM_BUILD_DIR/flutter_AppCoffe
+          flutter build apk --release --verbose
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - flutter_AppCoffe/build/app/outputs/flutter-apk/*.apk
