@@ -5,7 +5,7 @@ workflows:
     max_build_duration: 120
     environment:
       flutter: stable
-      java: 11  # Gunakan JDK 11 agar kompatibel dengan Gradle 7.5.1
+      java: 11  # Pastikan menggunakan JDK 11 agar kompatibel dengan Gradle 7.5.1
     scripts:
       - name: Check Java Version
         script: |
@@ -20,32 +20,35 @@ workflows:
       - name: Debug Build Path
         script: |
           echo "Current directory: $(pwd)"
-          ls -la  # Menampilkan isi folder untuk memastikan pubspec.yaml ada
+          ls -la
+          cd flutter_AppCoffe
+          echo "Inside flutter_AppCoffe:"
+          ls -la  # Mengecek apakah pubspec.yaml ada
 
       - name: Run Flutter Doctor
         script: |
+          cd flutter_AppCoffe
           flutter doctor -v
 
       - name: Clean Build
         script: |
-          cd $CM_BUILD_DIR
-          ls -la  # Cek apakah pubspec.yaml ada di root
+          cd flutter_AppCoffe
           flutter clean
 
       - name: Get Flutter Dependencies
         script: |
-          cd $CM_BUILD_DIR
+          cd flutter_AppCoffe
           flutter pub get
 
       - name: Run Gradle Manually (Debugging)
         script: |
-          cd $CM_BUILD_DIR/android
+          cd flutter_AppCoffe/android
           ./gradlew assembleRelease --stacktrace
 
       - name: Build APK
         script: |
-          cd $CM_BUILD_DIR
+          cd flutter_AppCoffe
           flutter build apk --release --verbose
 
     artifacts:
-      - build/app/outputs/flutter-apk/*.apk
+      - flutter_AppCoffe/build/app/outputs/flutter-apk/*.apk
