@@ -12,6 +12,12 @@ workflows:
           echo "JAVA_HOME: $JAVA_HOME"
           java -version
 
+      - name: Set JAVA_HOME (JDK 11)
+        script: |
+          export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+          echo "Using JAVA_HOME: $JAVA_HOME"
+          java -version
+
       - name: Debug Build Path
         script: |
           echo "Current directory: $(pwd)"
@@ -30,6 +36,8 @@ workflows:
           cd flutter_AppCoffe
           echo "Checking android directory..."
           ls -la android/
+          echo "Checking gradlew file..."
+          ls -la android/gradlew
 
       - name: Generate Gradle Wrapper (Jika Perlu)
         script: |
