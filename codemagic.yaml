@@ -36,8 +36,8 @@ workflows:
           cd flutter_AppCoffe
           echo "Checking android directory..."
           ls -la android/
-          echo "Checking gradlew file..."
-          ls -la android/gradlew
+          echo "Checking gradle/wrapper file..."
+          ls -la android/gradle/warpper
 
       - name: Generate Gradle Wrapper (Jika Perlu)
         script: |
