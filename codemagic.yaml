@@ -37,7 +37,7 @@ workflows:
           echo "Checking android directory..."
           ls -la android/
           echo "Checking gradle/wrapper file..."
-          ls -la android/gradle/warpper
+          ls -la android/gradle/wrapper
 
       - name: Generate Gradle Wrapper (Jika Perlu)
         script: |
